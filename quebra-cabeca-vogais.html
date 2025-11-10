@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
+  <title>O Mistério das Vogais Perdidas - Quebra-Cabeça</title>
+  <meta name="description" content="Jogo infantil de quebra-cabeça com a capa do livro 'O Mistério das Vogais Perdidas'. Arraste as peças e complete a imagem!">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background: linear-gradient(to bottom, #87CEEB, #E0F7FA);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      padding: 15px;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      touch-action: none;
+      overflow: hidden;
+    }
+
+    h1 {
+      color: #1E90FF;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+      margin: 10px 0;
+      font-size: clamp(1.5em, 5vw, 2.2em);
+      text-align: center;
+    }
+
+    .instructions {
+      background: #FFFACD;
+      padding: 10px 15px;
+      border-radius: 15px;
+      margin-bottom: 15px;
+      font-size: clamp(0.9em, 3.5vw, 1.1em);
+      color: #D2691E;
+      text-align: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      max-width: 90%;
+    }
+
+    .game-container {
+      position: relative;
+      width: 100%;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .puzzle-container {
+      position: relative;
+      width: 100%;
+      padding-bottom: 100%;
+      border: 8px solid #4682B4;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+      background: #000;
+    }
+
+    .puzzle-piece {
+      position: absolute;
+      background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAoAAAALACAYAAAH2zAQ2AAAgAElEQVR4nOzde5xV1f7/8e9mZ3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2Z3Z2  background-size: 100% 100%;
+      border: 3px solid white;
+      border-radius: 12px;
+      cursor: grab;
+      user-select: none;
+      transition: transform 0.15s ease;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    }
+
+    .puzzle-piece:active,
+    .puzzle-piece.touch-active {
+      cursor: grabbing;
+      transform: scale(1.08);
+      z-index: 100;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+    }
+
+    .puzzle-piece.correct {
+      border: 4px solid #32CD32 !important;
+      box-shadow: 0 0 20px #32CD32;
+    }
+
+    .win-message {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      background: rgba(255, 255, 255, 0.97);
+      padding: 25px;
+      border-radius: 30px;
+      text-align: center;
+      font-size: clamp(1.5em, 6vw, 2.2em);
+      color: #FF4500;
+      box-shadow: 0 0 40px gold;
+      z-index: 1000;
+      transition: transform 0.5s ease;
+    }
+
+    .win-message.show {
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    .restart-btn {
+      margin-top: 20px;
+      padding: 12px 30px;
+      font-size: clamp(1em, 4vw, 1.3em);
+      background: #FF6B6B;
+      color: white;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 5px 15px rgba(255,107,107,0.4);
+      transition: all 0.3s;
+      font-weight: bold;
+    }
+
+    .restart-btn:active {
+      transform: translateY(2px);
+    }
+
+    .confetti {
+      position: fixed;
+      width: 10px;
+      height: 10px;
+      background: #f1c40f;
+      pointer-events: none;
+      z-index: 999;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(120vh) rotate(720deg);
+        opacity: 0;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .puzzle-container { border-width: 6px; }
+      .puzzle-piece { border-width: 2px; }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>O Mistério das Vogais Perdidas</h1>
+  <p class="instructions">Arraste as peças com o dedo ou mouse para montar!</p>
+
+  <div class="game-container">
+    <div class="puzzle-container" id="puzzle"></div>
+  </div>
+
+  <div class="win-message" id="winMessage">
+    <div>PARABÉNS!</div>
+    <div style="font-size: 0.6em; margin-top: 8px;">Você completou o quebra-cabeça!</div>
+  </div>
+
+  <button class="restart-btn" onclick="restartGame()">Jogar Novamente</button>
+
+  <script>
+    // === CONFIGURAÇÃO RESPONSIVA ===
+    const ROWS = 4;
+    const COLS = 4;
+    let PIECE_SIZE = 0;
+    let PUZZLE_SIZE = 0;
+
+    const puzzle = document.getElementById('puzzle');
+    const winMessage = document.getElementById('winMessage');
+    let pieces = [];
+    let correctCount = 0;
+    let isDragging = false;
+    let draggedPiece = null;
+    let touchOffset = { x: 0, y: 0 };
+
+    function updateSizes() {
+      const container = puzzle.parentElement;
+      PUZZLE_SIZE = Math.min(container.clientWidth, 500);
+      PIECE_SIZE = PUZZLE_SIZE / COLS;
+      puzzle.style.width = PUZZLE_SIZE + 'px';
+      puzzle.style.height = PUZZLE_SIZE + 'px';
+    }
+
+    function createPieces() {
+      updateSizes();
+      puzzle.innerHTML = '';
+      pieces = [];
+      correctCount = 0;
+
+      const positions = Array.from({length: ROWS * COLS}, (_, i) => i);
+      for (let i = positions.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [positions[i], positions[j]] = [positions[j], positions[i]];
+      }
+
+      positions.forEach((pos, index) => {
+        const row = Math.floor(pos / COLS);
+        const col = pos % COLS;
+
+        const piece = document.createElement('div');
+        piece.classList.add('puzzle-piece');
+        piece.dataset.correctRow = row;
+        piece.dataset.correctCol = col;
+
+        piece.style.backgroundPosition = `${-col * 100}% ${-row * 100}%`;
+        piece.style.width = PIECE_SIZE + 'px';
+        piece.style.height = PIECE_SIZE + 'px';
+
+        const startRow = Math.floor(index / COLS);
+        const startCol = index % COLS;
+        piece.style.left = (startCol * PIECE_SIZE) + 'px';
+        piece.style.top = (startRow * PIECE_SIZE) + 'px';
+
+        // Eventos de mouse
+        piece.addEventListener('mousedown', startDrag);
+        piece.addEventListener('dragstart', e => e.preventDefault());
+
+        // Eventos de toque
+        piece.addEventListener('touchstart', startTouch, { passive: false });
+        piece.addEventListener('touchmove', moveTouch, { passive: false });
+        piece.addEventListener('touchend', endTouch);
+
+        puzzle.appendChild(piece);
+        pieces.push(piece);
+      });
+    }
+
+    // === DRAG COM MOUSE ===
+    function startDrag(e) {
+      if (e.button !== 0) return;
+      draggedPiece = this;
+      isDragging = true;
+      this.classList.add('touch-active');
+      document.addEventListener('mousemove', moveDrag);
+      document.addEventListener('mouseup', endDrag);
+    }
+
+    function moveDrag(e) {
+      if (!isDragging || !draggedPiece) return;
+      const rect = puzzle.getBoundingClientRect();
+      const x = e.clientX - rect.left - PIECE_SIZE / 2;
+      const y = e.clientY - rect.top - PIECE_SIZE / 2;
+      draggedPiece.style.left = Math.max(0, Math.min(x, PUZZLE_SIZE - PIECE_SIZE)) + 'px';
+      draggedPiece.style.top = Math.max(0, Math.min(y, PUZZLE_SIZE - PIECE_SIZE)) + 'px';
+    }
+
+    function endDrag() {
+      if (!isDragging || !draggedPiece) return;
+      isDragging = false;
+      draggedPiece.classList.remove('touch-active');
+      snapPiece(draggedPiece);
+      document.removeEventListener('mousemove', moveDrag);
+      document.removeEventListener('mouseup', endDrag);
+      draggedPiece = null;
+    }
+
+    // === DRAG COM TOQUE ===
+    function startTouch(e) {
+      e.preventDefault();
+      const touch = e.touches[0];
+      draggedPiece = this;
+      isDragging = true;
+      this.classList.add('touch-active');
+      const rect = this.getBoundingClientRect();
+      touchOffset.x = touch.clientX - rect.left;
+      touchOffset.y = touch.clientY - rect.top;
+    }
+
+    function moveTouch(e) {
+      if (!isDragging || !draggedPiece) return;
+      e.preventDefault();
+      const touch = e.touches[0];
+      const rect = puzzle.getBoundingClientRect();
+      const x = touch.clientX - rect.left - touchOffset.x;
+      const y = touch.clientY - rect.top - touchOffset.y;
+      draggedPiece.style.left = Math.max(0, Math.min(x, PUZZLE_SIZE - PIECE_SIZE)) + 'px';
+      draggedPiece.style.top = Math.max(0, Math.min(y, PUZZLE_SIZE - PIECE_SIZE)) + 'px';
+    }
+
+    function endTouch() {
+      if (!isDragging || !draggedPiece) return;
+      isDragging = false;
+      draggedPiece.classList.remove('touch-active');
+      snapPiece(draggedPiece);
+      draggedPiece = null;
+    }
+
+    // === SNAP NA POSIÇÃO CORRETA ===
+    function snapPiece(piece) {
+      const currentLeft = parseFloat(piece.style.left);
+      const currentTop = parseFloat(piece.style.top);
+      const correctCol = parseInt(piece.dataset.correctCol);
+      const correctRow = parseInt(piece.dataset.correctRow);
+      const targetLeft = correctCol * PIECE_SIZE;
+      const targetTop = correctRow * PIECE_SIZE;
+
+      const distance = Math.hypot(currentLeft - targetLeft, currentTop - targetTop);
+      if (distance < PIECE_SIZE * 0.3) {
+        piece.style.left = targetLeft + 'px';
+        piece.style.top = targetTop + 'px';
+      }
+      checkWin();
+    }
+
+    // === VERIFICAR VITÓRIA ===
+    function checkWin() {
+      correctCount = 0;
+      pieces.forEach(piece => {
+        const left = parseFloat(piece.style.left);
+        const top = parseFloat(piece.style.top);
+        const correctLeft = parseInt(piece.dataset.correctCol) * PIECE_SIZE;
+        const correctTop = parseInt(piece.dataset.correctRow) * PIECE_SIZE;
+
+        if (Math.abs(left - correctLeft) < 5 && Math.abs(top - correctTop) < 5) {
+          piece.classList.add('correct');
+          correctCount++;
+        } else {
+          piece.classList.remove('correct');
+        }
+      });
+
+      if (correctCount === ROWS * COLS) {
+        setTimeout(() => {
+          winMessage.classList.add('show');
+          playWinSound();
+          createConfetti();
+        }, 600);
+      }
+    }
+
+    // === SOM E CONFETI ===
+    function playWinSound() {
+      const audio = new Audio('data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQgU=');
+      audio.play().catch(() => {});
+    }
+
+    function createConfetti() {
+      for (let i = 0; i < 80; i++) {
+        const c = document.createElement('div');
+        c.classList.add('confetti');
+        c.style.left = Math.random() * 100 + 'vw';
+        c.style.background = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#FFA07A', '#98D8C8'][Math.floor(Math.random() * 5)];
+        c.style.animationDuration = (Math.random() * 3 + 2) + 's';
+        c.style.animationDelay = Math.random() * 1 + 's';
+        document.body.appendChild(c);
+        setTimeout(() => c.remove(), 5000);
+      }
+    }
+
+    function restartGame() {
+      winMessage.classList.remove('show');
+      createPieces();
+    }
+
+    // === INICIAR ===
+    window.addEventListener('resize', () => {
+      if (!isDragging) createPieces();
+    });
+    createPieces();
+  </script>
+</body>
+</html>
